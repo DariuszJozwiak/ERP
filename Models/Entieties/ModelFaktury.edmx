@@ -1,0 +1,1391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="entieties2.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="IdAdresu" />
+          </Key>
+          <Property Name="IdAdresu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ulica" Type="nvarchar" MaxLength="50" />
+          <Property Name="Miejscowosc" Type="nvarchar" MaxLength="50" />
+          <Property Name="NrDomu" Type="nchar" MaxLength="10" />
+          <Property Name="NrLokalu" Type="nchar" MaxLength="10" />
+          <Property Name="KodPocztowy" Type="nchar" MaxLength="10" />
+          <Property Name="CzyAktywny" Type="bit" />
+        </EntityType>
+        <EntityType Name="BibliotekaDokumentow">
+          <Key>
+            <PropertyRef Name="IdDokumentuBiblioteki" />
+          </Key>
+          <Property Name="IdDokumentuBiblioteki" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Odbiorca" Type="nvarchar" MaxLength="50" />
+          <Property Name="NrDok" Type="nchar" MaxLength="10" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+          <Property Name="CzyAktywny" Type="bit" />
+          <Property Name="Numer" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Faktura">
+          <Key>
+            <PropertyRef Name="IdFaktury" />
+          </Key>
+          <Property Name="IdFaktury" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Numer" Type="nchar" MaxLength="10" />
+          <Property Name="DataWystawienia" Type="date" />
+          <Property Name="IdKontrahenta" Type="int" />
+          <Property Name="TerminPłatnosci" Type="date" />
+          <Property Name="IdSposobuPlatnosci" Type="int" />
+          <Property Name="CzyZatwierdzono" Type="bit" />
+          <Property Name="CzyAktywna" Type="bit" />
+        </EntityType>
+        <EntityType Name="InformatorTowaru">
+          <Key>
+            <PropertyRef Name="IdInformatoraTowaru" />
+          </Key>
+          <Property Name="IdInformatoraTowaru" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data_utworzenie_zlecenia" Type="date" />
+          <Property Name="IdFaktury" Type="int" />
+          <Property Name="IdKontrahenta" Type="int" />
+          <Property Name="IdZamowieniaOdKlientow" Type="int" />
+          <Property Name="CzyAktywny" Type="bit" />
+        </EntityType>
+        <EntityType Name="JednostkiMiary">
+          <Key>
+            <PropertyRef Name="IDJednostkiMiary" />
+          </Key>
+          <Property Name="Opakowanie" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IDJednostkiMiary" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CzyAktywny" Type="bit" />
+        </EntityType>
+        <EntityType Name="Kadry">
+          <Key>
+            <PropertyRef Name="IdPracownika" />
+          </Key>
+          <Property Name="IdPracownika" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ImiePracownika" Type="nvarchar" MaxLength="50" />
+          <Property Name="NazwiskoPracownika" Type="nvarchar" MaxLength="50" />
+          <Property Name="DataZatrudnieniaPracownika" Type="date" />
+          <Property Name="MiastoZamieszkaniaPracownika" Type="nvarchar" MaxLength="50" />
+          <Property Name="KodPocztowyPracownika" Type="nvarchar" MaxLength="50" />
+          <Property Name="UlicaPracownika" Type="nvarchar" MaxLength="50" />
+          <Property Name="NrDomu_mieszkaniaPracownika" Type="nvarchar" MaxLength="50" />
+          <Property Name="CzyAktywny" Type="bit" />
+        </EntityType>
+        <EntityType Name="Kontrahent">
+          <Key>
+            <PropertyRef Name="IdKontrahenta" />
+          </Key>
+          <Property Name="IdKontrahenta" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NIP" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IdRodzaju" Type="int" Nullable="false" />
+          <Property Name="IdStatusu" Type="int" Nullable="false" />
+          <Property Name="IdAdresu" Type="int" Nullable="false" />
+          <Property Name="DataPrzystapienia" Type="date" Nullable="false" />
+          <Property Name="CzyAktywny" Type="bit" />
+        </EntityType>
+        <EntityType Name="KorektaFakturySprzedazy">
+          <Key>
+            <PropertyRef Name="IdKorektyFaktury" />
+          </Key>
+          <Property Name="IdKorektyFaktury" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFaktury" Type="int" />
+          <Property Name="DataWystawieniaKorekty" Type="date" />
+          <Property Name="CzyZatwierdzono" Type="bit" />
+          <Property Name="CzyAktywny" Type="bit" />
+          <Property Name="Numer" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="PozycjaFaktury">
+          <Key>
+            <PropertyRef Name="IdPozycjiFaktury" />
+          </Key>
+          <Property Name="IdPozycjiFaktury" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdFaktury" Type="int" Nullable="false" />
+          <Property Name="IdTowaru" Type="int" Nullable="false" />
+          <Property Name="CenaNetto" Type="money" Nullable="false" />
+          <Property Name="Ilosc" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Rabat" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CzyAktywny" Type="bit" />
+        </EntityType>
+        <EntityType Name="Przetargi">
+          <Key>
+            <PropertyRef Name="IDPrzetargu" />
+          </Key>
+          <Property Name="IDPrzetargu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NrPrzetargu" Type="nchar" MaxLength="10" />
+          <Property Name="NazwaPrzetargu" Type="nvarchar" MaxLength="50" />
+          <Property Name="DataOgloszenia" Type="date" />
+          <Property Name="DataZakonczenia" Type="date" />
+          <Property Name="CzyAktywny" Type="bit" />
+        </EntityType>
+        <EntityType Name="Rodzaj">
+          <Key>
+            <PropertyRef Name="IdRodzaju" />
+          </Key>
+          <Property Name="IdRodzaju" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+          <Property Name="CzyAktywny" Type="bit" />
+        </EntityType>
+        <EntityType Name="SposobPlatnosci">
+          <Key>
+            <PropertyRef Name="IdSposobuPlatnosci" />
+          </Key>
+          <Property Name="IdSposobuPlatnosci" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" />
+          <Property Name="Opis" Type="nvarchar(max)" />
+          <Property Name="CzyAktywny" Type="bit" />
+        </EntityType>
+        <EntityType Name="StanyMagazynowe">
+          <Key>
+            <PropertyRef Name="IdStanuMagazynowego" />
+          </Key>
+          <Property Name="IdStanuMagazynowego" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTowaru" Type="int" />
+          <Property Name="DataPrzyjecia" Type="date" />
+          <Property Name="DataPrzydatnosciDoUzycia" Type="date" />
+          <Property Name="IloscPrzyjeta" Type="int" />
+          <Property Name="CzyAktywny" Type="bit" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="IdStatusu" />
+          </Key>
+          <Property Name="IdStatusu" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nazwa" Type="nvarchar" MaxLength="50" />
+          <Property Name="CzyAktywny" Type="nchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="StratyMagazynoweIZwroty">
+          <Key>
+            <PropertyRef Name="IdStratMagazynowychIZwrotow" />
+          </Key>
+          <Property Name="IdStratMagazynowychIZwrotow" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTowaru" Type="int" />
+          <Property Name="DataZgloszenia" Type="date" />
+          <Property Name="Opis" Type="varchar" MaxLength="50" />
+          <Property Name="CzyAktywny" Type="bit" />
+          <Property Name="Numer" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Towar">
+          <Key>
+            <PropertyRef Name="IdTowaru" />
+          </Key>
+          <Property Name="IdTowaru" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Kod" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="NazwaTowaru" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="StawkaVatSprzedazy" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CenaNetto" Type="money" Nullable="false" />
+          <Property Name="Marza" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CzyAktywny" Type="bit" />
+          <Property Name="IdStanuMagazynowego" Type="int" />
+          <Property Name="IdStatusu" Type="int" />
+        </EntityType>
+        <EntityType Name="UzytkowicyERP">
+          <Key>
+            <PropertyRef Name="IDUzytkownikaERP" />
+          </Key>
+          <Property Name="IDUzytkownikaERP" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Stanowisko" Type="nvarchar" MaxLength="50" />
+          <Property Name="Dzial" Type="nvarchar" MaxLength="50" />
+          <Property Name="CzyAktywny" Type="bit" />
+          <Property Name="IDPracownika" Type="int" />
+        </EntityType>
+        <EntityType Name="ZamowieniaOdKlientow">
+          <Key>
+            <PropertyRef Name="IdZamowieniaOdKlientow" />
+          </Key>
+          <Property Name="IdZamowieniaOdKlientow" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTowaru" Type="int" />
+          <Property Name="IloscZamowiona" Type="int" />
+          <Property Name="Opis" Type="nvarchar" MaxLength="50" />
+          <Property Name="Data_utworzenia_zlecenia" Type="date" />
+          <Property Name="CzyAktywny" Type="bit" />
+          <Property Name="IdKontrahenta" Type="int" />
+          <Property Name="IdStanuMagazynowego" Type="int" />
+          <Property Name="Numer" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ZamowieniaWMS">
+          <Key>
+            <PropertyRef Name="IdZamowieniaWMS" />
+          </Key>
+          <Property Name="IdZamowieniaWMS" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Data_utworzenia_zlecenia" Type="date" />
+          <Property Name="IdZamowieniaOdKlienta" Type="int" />
+          <Property Name="IloscWydana" Type="int" />
+          <Property Name="IdTowaru" Type="int" />
+          <Property Name="CzyAktywny" Type="bit" />
+          <Property Name="IdKontrahenta" Type="int" />
+          <Property Name="Numer" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Faktura_Kontrahent">
+          <End Role="Kontrahent" Type="Self.Kontrahent" Multiplicity="0..1" />
+          <End Role="Faktura" Type="Self.Faktura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kontrahent">
+              <PropertyRef Name="IdKontrahenta" />
+            </Principal>
+            <Dependent Role="Faktura">
+              <PropertyRef Name="IdKontrahenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Faktura_SposobPlatnosci">
+          <End Role="SposobPlatnosci" Type="Self.SposobPlatnosci" Multiplicity="0..1" />
+          <End Role="Faktura" Type="Self.Faktura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SposobPlatnosci">
+              <PropertyRef Name="IdSposobuPlatnosci" />
+            </Principal>
+            <Dependent Role="Faktura">
+              <PropertyRef Name="IdSposobuPlatnosci" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kontrahent_Adres">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="1" />
+          <End Role="Kontrahent" Type="Self.Kontrahent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="IdAdresu" />
+            </Principal>
+            <Dependent Role="Kontrahent">
+              <PropertyRef Name="IdAdresu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kontrahent_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Kontrahent" Type="Self.Kontrahent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="IdStatusu" />
+            </Principal>
+            <Dependent Role="Kontrahent">
+              <PropertyRef Name="IdStatusu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kontrahent_Status1">
+          <End Role="Rodzaj" Type="Self.Rodzaj" Multiplicity="1" />
+          <End Role="Kontrahent" Type="Self.Kontrahent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rodzaj">
+              <PropertyRef Name="IdRodzaju" />
+            </Principal>
+            <Dependent Role="Kontrahent">
+              <PropertyRef Name="IdRodzaju" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KorektaFakturySprzedazy_Faktura">
+          <End Role="Faktura" Type="Self.Faktura" Multiplicity="0..1" />
+          <End Role="KorektaFakturySprzedazy" Type="Self.KorektaFakturySprzedazy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faktura">
+              <PropertyRef Name="IdFaktury" />
+            </Principal>
+            <Dependent Role="KorektaFakturySprzedazy">
+              <PropertyRef Name="IdFaktury" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PozycjaFaktury_Faktura">
+          <End Role="Faktura" Type="Self.Faktura" Multiplicity="1" />
+          <End Role="PozycjaFaktury" Type="Self.PozycjaFaktury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faktura">
+              <PropertyRef Name="IdFaktury" />
+            </Principal>
+            <Dependent Role="PozycjaFaktury">
+              <PropertyRef Name="IdFaktury" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PozycjaFaktury_Towar">
+          <End Role="Towar" Type="Self.Towar" Multiplicity="1" />
+          <End Role="PozycjaFaktury" Type="Self.PozycjaFaktury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towar">
+              <PropertyRef Name="IdTowaru" />
+            </Principal>
+            <Dependent Role="PozycjaFaktury">
+              <PropertyRef Name="IdTowaru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StanyMagazynowe_Towar">
+          <End Role="Towar" Type="Self.Towar" Multiplicity="0..1" />
+          <End Role="StanyMagazynowe" Type="Self.StanyMagazynowe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towar">
+              <PropertyRef Name="IdTowaru" />
+            </Principal>
+            <Dependent Role="StanyMagazynowe">
+              <PropertyRef Name="IdTowaru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StratyMagazynoweIZwroty_Towar">
+          <End Role="Towar" Type="Self.Towar" Multiplicity="0..1" />
+          <End Role="StratyMagazynoweIZwroty" Type="Self.StratyMagazynoweIZwroty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towar">
+              <PropertyRef Name="IdTowaru" />
+            </Principal>
+            <Dependent Role="StratyMagazynoweIZwroty">
+              <PropertyRef Name="IdTowaru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Towar_StanyMagazynowe">
+          <End Role="StanyMagazynowe" Type="Self.StanyMagazynowe" Multiplicity="0..1" />
+          <End Role="Towar" Type="Self.Towar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StanyMagazynowe">
+              <PropertyRef Name="IdStanuMagazynowego" />
+            </Principal>
+            <Dependent Role="Towar">
+              <PropertyRef Name="IdStanuMagazynowego" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Towar_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Towar" Type="Self.Towar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="IdStatusu" />
+            </Principal>
+            <Dependent Role="Towar">
+              <PropertyRef Name="IdStatusu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UzytkowicyERP_Kadry">
+          <End Role="Kadry" Type="Self.Kadry" Multiplicity="0..1" />
+          <End Role="UzytkowicyERP" Type="Self.UzytkowicyERP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kadry">
+              <PropertyRef Name="IdPracownika" />
+            </Principal>
+            <Dependent Role="UzytkowicyERP">
+              <PropertyRef Name="IDPracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZamowieniaOdKlientow_Kontrahent">
+          <End Role="Kontrahent" Type="Self.Kontrahent" Multiplicity="0..1" />
+          <End Role="ZamowieniaOdKlientow" Type="Self.ZamowieniaOdKlientow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kontrahent">
+              <PropertyRef Name="IdKontrahenta" />
+            </Principal>
+            <Dependent Role="ZamowieniaOdKlientow">
+              <PropertyRef Name="IdKontrahenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZamowieniaOdKlientow_Towar">
+          <End Role="Towar" Type="Self.Towar" Multiplicity="0..1" />
+          <End Role="ZamowieniaOdKlientow" Type="Self.ZamowieniaOdKlientow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towar">
+              <PropertyRef Name="IdTowaru" />
+            </Principal>
+            <Dependent Role="ZamowieniaOdKlientow">
+              <PropertyRef Name="IdTowaru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZamowieniaWMS_ZamowieniaOdKlientow">
+          <End Role="ZamowieniaOdKlientow" Type="Self.ZamowieniaOdKlientow" Multiplicity="0..1" />
+          <End Role="ZamowieniaWMS" Type="Self.ZamowieniaWMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZamowieniaOdKlientow">
+              <PropertyRef Name="IdZamowieniaOdKlientow" />
+            </Principal>
+            <Dependent Role="ZamowieniaWMS">
+              <PropertyRef Name="IdZamowieniaOdKlienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZamowieniaWMS_ZamowieniaOdKlientow1">
+          <End Role="ZamowieniaOdKlientow" Type="Self.ZamowieniaOdKlientow" Multiplicity="0..1" />
+          <End Role="ZamowieniaWMS" Type="Self.ZamowieniaWMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZamowieniaOdKlientow">
+              <PropertyRef Name="IdZamowieniaOdKlientow" />
+            </Principal>
+            <Dependent Role="ZamowieniaWMS">
+              <PropertyRef Name="IdZamowieniaOdKlienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="entieties2StoreContainer">
+          <EntitySet Name="Adres" EntityType="Self.Adres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BibliotekaDokumentow" EntityType="Self.BibliotekaDokumentow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Faktura" EntityType="Self.Faktura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InformatorTowaru" EntityType="Self.InformatorTowaru" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="JednostkiMiary" EntityType="Self.JednostkiMiary" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kadry" EntityType="Self.Kadry" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Kontrahent" EntityType="Self.Kontrahent" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KorektaFakturySprzedazy" EntityType="Self.KorektaFakturySprzedazy" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PozycjaFaktury" EntityType="Self.PozycjaFaktury" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Przetargi" EntityType="Self.Przetargi" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rodzaj" EntityType="Self.Rodzaj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SposobPlatnosci" EntityType="Self.SposobPlatnosci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StanyMagazynowe" EntityType="Self.StanyMagazynowe" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StratyMagazynoweIZwroty" EntityType="Self.StratyMagazynoweIZwroty" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Towar" EntityType="Self.Towar" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UzytkowicyERP" EntityType="Self.UzytkowicyERP" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZamowieniaOdKlientow" EntityType="Self.ZamowieniaOdKlientow" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZamowieniaWMS" EntityType="Self.ZamowieniaWMS" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Faktura_Kontrahent" Association="Self.FK_Faktura_Kontrahent">
+            <End Role="Kontrahent" EntitySet="Kontrahent" />
+            <End Role="Faktura" EntitySet="Faktura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Faktura_SposobPlatnosci" Association="Self.FK_Faktura_SposobPlatnosci">
+            <End Role="SposobPlatnosci" EntitySet="SposobPlatnosci" />
+            <End Role="Faktura" EntitySet="Faktura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kontrahent_Adres" Association="Self.FK_Kontrahent_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Kontrahent" EntitySet="Kontrahent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kontrahent_Status" Association="Self.FK_Kontrahent_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Kontrahent" EntitySet="Kontrahent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kontrahent_Status1" Association="Self.FK_Kontrahent_Status1">
+            <End Role="Rodzaj" EntitySet="Rodzaj" />
+            <End Role="Kontrahent" EntitySet="Kontrahent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KorektaFakturySprzedazy_Faktura" Association="Self.FK_KorektaFakturySprzedazy_Faktura">
+            <End Role="Faktura" EntitySet="Faktura" />
+            <End Role="KorektaFakturySprzedazy" EntitySet="KorektaFakturySprzedazy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PozycjaFaktury_Faktura" Association="Self.FK_PozycjaFaktury_Faktura">
+            <End Role="Faktura" EntitySet="Faktura" />
+            <End Role="PozycjaFaktury" EntitySet="PozycjaFaktury" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PozycjaFaktury_Towar" Association="Self.FK_PozycjaFaktury_Towar">
+            <End Role="Towar" EntitySet="Towar" />
+            <End Role="PozycjaFaktury" EntitySet="PozycjaFaktury" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StanyMagazynowe_Towar" Association="Self.FK_StanyMagazynowe_Towar">
+            <End Role="Towar" EntitySet="Towar" />
+            <End Role="StanyMagazynowe" EntitySet="StanyMagazynowe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StratyMagazynoweIZwroty_Towar" Association="Self.FK_StratyMagazynoweIZwroty_Towar">
+            <End Role="Towar" EntitySet="Towar" />
+            <End Role="StratyMagazynoweIZwroty" EntitySet="StratyMagazynoweIZwroty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Towar_StanyMagazynowe" Association="Self.FK_Towar_StanyMagazynowe">
+            <End Role="StanyMagazynowe" EntitySet="StanyMagazynowe" />
+            <End Role="Towar" EntitySet="Towar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Towar_Status" Association="Self.FK_Towar_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Towar" EntitySet="Towar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UzytkowicyERP_Kadry" Association="Self.FK_UzytkowicyERP_Kadry">
+            <End Role="Kadry" EntitySet="Kadry" />
+            <End Role="UzytkowicyERP" EntitySet="UzytkowicyERP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZamowieniaOdKlientow_Kontrahent" Association="Self.FK_ZamowieniaOdKlientow_Kontrahent">
+            <End Role="Kontrahent" EntitySet="Kontrahent" />
+            <End Role="ZamowieniaOdKlientow" EntitySet="ZamowieniaOdKlientow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZamowieniaOdKlientow_Towar" Association="Self.FK_ZamowieniaOdKlientow_Towar">
+            <End Role="Towar" EntitySet="Towar" />
+            <End Role="ZamowieniaOdKlientow" EntitySet="ZamowieniaOdKlientow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZamowieniaWMS_ZamowieniaOdKlientow" Association="Self.FK_ZamowieniaWMS_ZamowieniaOdKlientow">
+            <End Role="ZamowieniaOdKlientow" EntitySet="ZamowieniaOdKlientow" />
+            <End Role="ZamowieniaWMS" EntitySet="ZamowieniaWMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZamowieniaWMS_ZamowieniaOdKlientow1" Association="Self.FK_ZamowieniaWMS_ZamowieniaOdKlientow1">
+            <End Role="ZamowieniaOdKlientow" EntitySet="ZamowieniaOdKlientow" />
+            <End Role="ZamowieniaWMS" EntitySet="ZamowieniaWMS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="entieties2" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="IdAdresu" />
+          </Key>
+          <Property Name="IdAdresu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ulica" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Miejscowosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NrDomu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NrLokalu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="KodPocztowy" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <NavigationProperty Name="Kontrahent" Relationship="Self.FK_Kontrahent_Adres" FromRole="Adres" ToRole="Kontrahent" />
+        </EntityType>
+        <EntityType Name="BibliotekaDokumentow">
+          <Key>
+            <PropertyRef Name="IdDokumentuBiblioteki" />
+          </Key>
+          <Property Name="IdDokumentuBiblioteki" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Odbiorca" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NrDok" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <Property Name="Numer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Faktura">
+          <Key>
+            <PropertyRef Name="IdFaktury" />
+          </Key>
+          <Property Name="IdFaktury" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Numer" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="DataWystawienia" Type="DateTime" Precision="0" />
+          <Property Name="IdKontrahenta" Type="Int32" />
+          <Property Name="TerminPłatnosci" Type="DateTime" Precision="0" />
+          <Property Name="IdSposobuPlatnosci" Type="Int32" />
+          <Property Name="CzyZatwierdzono" Type="Boolean" />
+          <Property Name="CzyAktywna" Type="Boolean" />
+          <NavigationProperty Name="Kontrahent" Relationship="Self.FK_Faktura_Kontrahent" FromRole="Faktura" ToRole="Kontrahent" />
+          <NavigationProperty Name="SposobPlatnosci" Relationship="Self.FK_Faktura_SposobPlatnosci" FromRole="Faktura" ToRole="SposobPlatnosci" />
+          <NavigationProperty Name="KorektaFakturySprzedazy" Relationship="Self.FK_KorektaFakturySprzedazy_Faktura" FromRole="Faktura" ToRole="KorektaFakturySprzedazy" />
+          <NavigationProperty Name="PozycjaFaktury" Relationship="Self.FK_PozycjaFaktury_Faktura" FromRole="Faktura" ToRole="PozycjaFaktury" />
+        </EntityType>
+        <EntityType Name="InformatorTowaru">
+          <Key>
+            <PropertyRef Name="IdInformatoraTowaru" />
+          </Key>
+          <Property Name="IdInformatoraTowaru" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data_utworzenie_zlecenia" Type="DateTime" Precision="0" />
+          <Property Name="IdFaktury" Type="Int32" />
+          <Property Name="IdKontrahenta" Type="Int32" />
+          <Property Name="IdZamowieniaOdKlientow" Type="Int32" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="JednostkiMiary">
+          <Key>
+            <PropertyRef Name="IDJednostkiMiary" />
+          </Key>
+          <Property Name="Opakowanie" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IDJednostkiMiary" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Kadry">
+          <Key>
+            <PropertyRef Name="IdPracownika" />
+          </Key>
+          <Property Name="IdPracownika" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ImiePracownika" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NazwiskoPracownika" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataZatrudnieniaPracownika" Type="DateTime" Precision="0" />
+          <Property Name="MiastoZamieszkaniaPracownika" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="KodPocztowyPracownika" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UlicaPracownika" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NrDomu_mieszkaniaPracownika" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="UzytkowicyERP" Relationship="Self.FK_UzytkowicyERP_Kadry" FromRole="Kadry" ToRole="UzytkowicyERP" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Kontrahent">
+          <Key>
+            <PropertyRef Name="IdKontrahenta" />
+          </Key>
+          <Property Name="IdKontrahenta" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NIP" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IdRodzaju" Type="Int32" Nullable="false" />
+          <Property Name="IdStatusu" Type="Int32" Nullable="false" />
+          <Property Name="IdAdresu" Type="Int32" Nullable="false" />
+          <Property Name="DataPrzystapienia" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <NavigationProperty Name="Adres" Relationship="Self.FK_Kontrahent_Adres" FromRole="Kontrahent" ToRole="Adres" />
+          <NavigationProperty Name="Faktura" Relationship="Self.FK_Faktura_Kontrahent" FromRole="Kontrahent" ToRole="Faktura" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Kontrahent_Status" FromRole="Kontrahent" ToRole="Status" />
+          <NavigationProperty Name="Rodzaj" Relationship="Self.FK_Kontrahent_Status1" FromRole="Kontrahent" ToRole="Rodzaj" />
+          <NavigationProperty Name="ZamowieniaOdKlientow" Relationship="Self.FK_ZamowieniaOdKlientow_Kontrahent" FromRole="Kontrahent" ToRole="ZamowieniaOdKlientow" />
+        </EntityType>
+        <EntityType Name="KorektaFakturySprzedazy">
+          <Key>
+            <PropertyRef Name="IdKorektyFaktury" />
+          </Key>
+          <Property Name="IdKorektyFaktury" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdFaktury" Type="Int32" />
+          <Property Name="DataWystawieniaKorekty" Type="DateTime" Precision="0" />
+          <Property Name="CzyZatwierdzono" Type="Boolean" />
+          <NavigationProperty Name="Faktura" Relationship="Self.FK_KorektaFakturySprzedazy_Faktura" FromRole="KorektaFakturySprzedazy" ToRole="Faktura" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <Property Name="Numer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PozycjaFaktury">
+          <Key>
+            <PropertyRef Name="IdPozycjiFaktury" />
+          </Key>
+          <Property Name="IdPozycjiFaktury" Type="Int32" Nullable="false" />
+          <Property Name="IdFaktury" Type="Int32" Nullable="false" />
+          <Property Name="IdTowaru" Type="Int32" Nullable="false" />
+          <Property Name="CenaNetto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Ilosc" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="Rabat" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <NavigationProperty Name="Faktura" Relationship="Self.FK_PozycjaFaktury_Faktura" FromRole="PozycjaFaktury" ToRole="Faktura" />
+          <NavigationProperty Name="Towar" Relationship="Self.FK_PozycjaFaktury_Towar" FromRole="PozycjaFaktury" ToRole="Towar" />
+        </EntityType>
+        <EntityType Name="Przetargi">
+          <Key>
+            <PropertyRef Name="IDPrzetargu" />
+          </Key>
+          <Property Name="IDPrzetargu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NrPrzetargu" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="NazwaPrzetargu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DataOgloszenia" Type="DateTime" Precision="0" />
+          <Property Name="DataZakonczenia" Type="DateTime" Precision="0" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Rodzaj">
+          <Key>
+            <PropertyRef Name="IdRodzaju" />
+          </Key>
+          <Property Name="IdRodzaju" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <NavigationProperty Name="Kontrahent" Relationship="Self.FK_Kontrahent_Status1" FromRole="Rodzaj" ToRole="Kontrahent" />
+        </EntityType>
+        <EntityType Name="SposobPlatnosci">
+          <Key>
+            <PropertyRef Name="IdSposobuPlatnosci" />
+          </Key>
+          <Property Name="IdSposobuPlatnosci" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Opis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <NavigationProperty Name="Faktura" Relationship="Self.FK_Faktura_SposobPlatnosci" FromRole="SposobPlatnosci" ToRole="Faktura" />
+        </EntityType>
+        <EntityType Name="StanyMagazynowe">
+          <Key>
+            <PropertyRef Name="IdStanuMagazynowego" />
+          </Key>
+          <Property Name="IdStanuMagazynowego" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTowaru" Type="Int32" />
+          <Property Name="DataPrzyjecia" Type="DateTime" Precision="0" />
+          <Property Name="DataPrzydatnosciDoUzycia" Type="DateTime" Precision="0" />
+          <Property Name="IloscPrzyjeta" Type="Int32" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <NavigationProperty Name="Towar" Relationship="Self.FK_StanyMagazynowe_Towar" FromRole="StanyMagazynowe" ToRole="Towar" />
+          <NavigationProperty Name="Towar1" Relationship="Self.FK_Towar_StanyMagazynowe" FromRole="StanyMagazynowe" ToRole="Towar" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="IdStatusu" />
+          </Key>
+          <Property Name="IdStatusu" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CzyAktywny" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="Kontrahent" Relationship="Self.FK_Kontrahent_Status" FromRole="Status" ToRole="Kontrahent" />
+          <NavigationProperty Name="Towar" Relationship="Self.FK_Towar_Status" FromRole="Status" ToRole="Towar" />
+        </EntityType>
+        <EntityType Name="StratyMagazynoweIZwroty">
+          <Key>
+            <PropertyRef Name="IdStratMagazynowychIZwrotow" />
+          </Key>
+          <Property Name="IdStratMagazynowychIZwrotow" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTowaru" Type="Int32" />
+          <Property Name="DataZgloszenia" Type="DateTime" Precision="0" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <NavigationProperty Name="Towar" Relationship="Self.FK_StratyMagazynoweIZwroty_Towar" FromRole="StratyMagazynoweIZwroty" ToRole="Towar" />
+          <Property Name="Numer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Towar">
+          <Key>
+            <PropertyRef Name="IdTowaru" />
+          </Key>
+          <Property Name="IdTowaru" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Kod" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NazwaTowaru" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="StawkaVatSprzedazy" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CenaNetto" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Marza" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <Property Name="IdStanuMagazynowego" Type="Int32" />
+          <Property Name="IdStatusu" Type="Int32" />
+          <NavigationProperty Name="PozycjaFaktury" Relationship="Self.FK_PozycjaFaktury_Towar" FromRole="Towar" ToRole="PozycjaFaktury" />
+          <NavigationProperty Name="StanyMagazynowe" Relationship="Self.FK_StanyMagazynowe_Towar" FromRole="Towar" ToRole="StanyMagazynowe" />
+          <NavigationProperty Name="StanyMagazynowe1" Relationship="Self.FK_Towar_StanyMagazynowe" FromRole="Towar" ToRole="StanyMagazynowe" />
+          <NavigationProperty Name="Status" Relationship="Self.FK_Towar_Status" FromRole="Towar" ToRole="Status" />
+          <NavigationProperty Name="StratyMagazynoweIZwroty" Relationship="Self.FK_StratyMagazynoweIZwroty_Towar" FromRole="Towar" ToRole="StratyMagazynoweIZwroty" />
+          <NavigationProperty Name="ZamowieniaOdKlientow" Relationship="Self.FK_ZamowieniaOdKlientow_Towar" FromRole="Towar" ToRole="ZamowieniaOdKlientow" />
+        </EntityType>
+        <EntityType Name="UzytkowicyERP">
+          <Key>
+            <PropertyRef Name="IDUzytkownikaERP" />
+          </Key>
+          <Property Name="IDUzytkownikaERP" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Stanowisko" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Dzial" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <Property Name="IDPracownika" Type="Int32" />
+          <NavigationProperty Name="Kadry" Relationship="Self.FK_UzytkowicyERP_Kadry" FromRole="UzytkowicyERP" ToRole="Kadry" />
+        </EntityType>
+        <EntityType Name="ZamowieniaOdKlientow">
+          <Key>
+            <PropertyRef Name="IdZamowieniaOdKlientow" />
+          </Key>
+          <Property Name="IdZamowieniaOdKlientow" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTowaru" Type="Int32" />
+          <Property Name="IloscZamowiona" Type="Int32" />
+          <Property Name="Opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Data_utworzenia_zlecenia" Type="DateTime" Precision="0" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <Property Name="IdKontrahenta" Type="Int32" />
+          <Property Name="IdStanuMagazynowego" Type="Int32" />
+          <NavigationProperty Name="Kontrahent" Relationship="Self.FK_ZamowieniaOdKlientow_Kontrahent" FromRole="ZamowieniaOdKlientow" ToRole="Kontrahent" />
+          <NavigationProperty Name="Towar" Relationship="Self.FK_ZamowieniaOdKlientow_Towar" FromRole="ZamowieniaOdKlientow" ToRole="Towar" />
+          <NavigationProperty Name="ZamowieniaWMS" Relationship="Self.FK_ZamowieniaWMS_ZamowieniaOdKlientow" FromRole="ZamowieniaOdKlientow" ToRole="ZamowieniaWMS" />
+          <NavigationProperty Name="ZamowieniaWMS1" Relationship="Self.FK_ZamowieniaWMS_ZamowieniaOdKlientow1" FromRole="ZamowieniaOdKlientow" ToRole="ZamowieniaWMS" />
+          <Property Name="Numer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ZamowieniaWMS">
+          <Key>
+            <PropertyRef Name="IdZamowieniaWMS" />
+          </Key>
+          <Property Name="IdZamowieniaWMS" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Data_utworzenia_zlecenia" Type="DateTime" Precision="0" />
+          <Property Name="IdZamowieniaOdKlienta" Type="Int32" />
+          <Property Name="IloscWydana" Type="Int32" />
+          <Property Name="IdTowaru" Type="Int32" />
+          <Property Name="CzyAktywny" Type="Boolean" />
+          <Property Name="IdKontrahenta" Type="Int32" />
+          <NavigationProperty Name="ZamowieniaOdKlientow" Relationship="Self.FK_ZamowieniaWMS_ZamowieniaOdKlientow" FromRole="ZamowieniaWMS" ToRole="ZamowieniaOdKlientow" />
+          <NavigationProperty Name="ZamowieniaOdKlientow1" Relationship="Self.FK_ZamowieniaWMS_ZamowieniaOdKlientow1" FromRole="ZamowieniaWMS" ToRole="ZamowieniaOdKlientow" />
+          <Property Name="Numer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_Kontrahent_Adres">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="1" />
+          <End Role="Kontrahent" Type="Self.Kontrahent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="IdAdresu" />
+            </Principal>
+            <Dependent Role="Kontrahent">
+              <PropertyRef Name="IdAdresu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Faktura_Kontrahent">
+          <End Role="Kontrahent" Type="Self.Kontrahent" Multiplicity="0..1" />
+          <End Role="Faktura" Type="Self.Faktura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kontrahent">
+              <PropertyRef Name="IdKontrahenta" />
+            </Principal>
+            <Dependent Role="Faktura">
+              <PropertyRef Name="IdKontrahenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Faktura_SposobPlatnosci">
+          <End Role="SposobPlatnosci" Type="Self.SposobPlatnosci" Multiplicity="0..1" />
+          <End Role="Faktura" Type="Self.Faktura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SposobPlatnosci">
+              <PropertyRef Name="IdSposobuPlatnosci" />
+            </Principal>
+            <Dependent Role="Faktura">
+              <PropertyRef Name="IdSposobuPlatnosci" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_KorektaFakturySprzedazy_Faktura">
+          <End Role="Faktura" Type="Self.Faktura" Multiplicity="0..1" />
+          <End Role="KorektaFakturySprzedazy" Type="Self.KorektaFakturySprzedazy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faktura">
+              <PropertyRef Name="IdFaktury" />
+            </Principal>
+            <Dependent Role="KorektaFakturySprzedazy">
+              <PropertyRef Name="IdFaktury" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PozycjaFaktury_Faktura">
+          <End Role="Faktura" Type="Self.Faktura" Multiplicity="1" />
+          <End Role="PozycjaFaktury" Type="Self.PozycjaFaktury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Faktura">
+              <PropertyRef Name="IdFaktury" />
+            </Principal>
+            <Dependent Role="PozycjaFaktury">
+              <PropertyRef Name="IdFaktury" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UzytkowicyERP_Kadry">
+          <End Role="Kadry" Type="Self.Kadry" Multiplicity="0..1" />
+          <End Role="UzytkowicyERP" Type="Self.UzytkowicyERP" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kadry">
+              <PropertyRef Name="IdPracownika" />
+            </Principal>
+            <Dependent Role="UzytkowicyERP">
+              <PropertyRef Name="IDPracownika" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kontrahent_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="Kontrahent" Type="Self.Kontrahent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="IdStatusu" />
+            </Principal>
+            <Dependent Role="Kontrahent">
+              <PropertyRef Name="IdStatusu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kontrahent_Status1">
+          <End Role="Rodzaj" Type="Self.Rodzaj" Multiplicity="1" />
+          <End Role="Kontrahent" Type="Self.Kontrahent" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Rodzaj">
+              <PropertyRef Name="IdRodzaju" />
+            </Principal>
+            <Dependent Role="Kontrahent">
+              <PropertyRef Name="IdRodzaju" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZamowieniaOdKlientow_Kontrahent">
+          <End Role="Kontrahent" Type="Self.Kontrahent" Multiplicity="0..1" />
+          <End Role="ZamowieniaOdKlientow" Type="Self.ZamowieniaOdKlientow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kontrahent">
+              <PropertyRef Name="IdKontrahenta" />
+            </Principal>
+            <Dependent Role="ZamowieniaOdKlientow">
+              <PropertyRef Name="IdKontrahenta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PozycjaFaktury_Towar">
+          <End Role="Towar" Type="Self.Towar" Multiplicity="1" />
+          <End Role="PozycjaFaktury" Type="Self.PozycjaFaktury" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towar">
+              <PropertyRef Name="IdTowaru" />
+            </Principal>
+            <Dependent Role="PozycjaFaktury">
+              <PropertyRef Name="IdTowaru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StanyMagazynowe_Towar">
+          <End Role="Towar" Type="Self.Towar" Multiplicity="0..1" />
+          <End Role="StanyMagazynowe" Type="Self.StanyMagazynowe" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towar">
+              <PropertyRef Name="IdTowaru" />
+            </Principal>
+            <Dependent Role="StanyMagazynowe">
+              <PropertyRef Name="IdTowaru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Towar_StanyMagazynowe">
+          <End Role="StanyMagazynowe" Type="Self.StanyMagazynowe" Multiplicity="0..1" />
+          <End Role="Towar" Type="Self.Towar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StanyMagazynowe">
+              <PropertyRef Name="IdStanuMagazynowego" />
+            </Principal>
+            <Dependent Role="Towar">
+              <PropertyRef Name="IdStanuMagazynowego" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Towar_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="0..1" />
+          <End Role="Towar" Type="Self.Towar" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="IdStatusu" />
+            </Principal>
+            <Dependent Role="Towar">
+              <PropertyRef Name="IdStatusu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StratyMagazynoweIZwroty_Towar">
+          <End Role="Towar" Type="Self.Towar" Multiplicity="0..1" />
+          <End Role="StratyMagazynoweIZwroty" Type="Self.StratyMagazynoweIZwroty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towar">
+              <PropertyRef Name="IdTowaru" />
+            </Principal>
+            <Dependent Role="StratyMagazynoweIZwroty">
+              <PropertyRef Name="IdTowaru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZamowieniaOdKlientow_Towar">
+          <End Role="Towar" Type="Self.Towar" Multiplicity="0..1" />
+          <End Role="ZamowieniaOdKlientow" Type="Self.ZamowieniaOdKlientow" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Towar">
+              <PropertyRef Name="IdTowaru" />
+            </Principal>
+            <Dependent Role="ZamowieniaOdKlientow">
+              <PropertyRef Name="IdTowaru" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZamowieniaWMS_ZamowieniaOdKlientow">
+          <End Role="ZamowieniaOdKlientow" Type="Self.ZamowieniaOdKlientow" Multiplicity="0..1" />
+          <End Role="ZamowieniaWMS" Type="Self.ZamowieniaWMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZamowieniaOdKlientow">
+              <PropertyRef Name="IdZamowieniaOdKlientow" />
+            </Principal>
+            <Dependent Role="ZamowieniaWMS">
+              <PropertyRef Name="IdZamowieniaOdKlienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZamowieniaWMS_ZamowieniaOdKlientow1">
+          <End Role="ZamowieniaOdKlientow" Type="Self.ZamowieniaOdKlientow" Multiplicity="0..1" />
+          <End Role="ZamowieniaWMS" Type="Self.ZamowieniaWMS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ZamowieniaOdKlientow">
+              <PropertyRef Name="IdZamowieniaOdKlientow" />
+            </Principal>
+            <Dependent Role="ZamowieniaWMS">
+              <PropertyRef Name="IdZamowieniaOdKlienta" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Adres" EntityType="Self.Adres" />
+          <EntitySet Name="BibliotekaDokumentow" EntityType="Self.BibliotekaDokumentow" />
+          <EntitySet Name="Faktura" EntityType="Self.Faktura" />
+          <EntitySet Name="InformatorTowaru" EntityType="Self.InformatorTowaru" />
+          <EntitySet Name="JednostkiMiary" EntityType="Self.JednostkiMiary" />
+          <EntitySet Name="Kadry" EntityType="Self.Kadry" />
+          <EntitySet Name="Kontrahent" EntityType="Self.Kontrahent" />
+          <EntitySet Name="KorektaFakturySprzedazy" EntityType="Self.KorektaFakturySprzedazy" />
+          <EntitySet Name="PozycjaFaktury" EntityType="Self.PozycjaFaktury" />
+          <EntitySet Name="Przetargi" EntityType="Self.Przetargi" />
+          <EntitySet Name="Rodzaj" EntityType="Self.Rodzaj" />
+          <EntitySet Name="SposobPlatnosci" EntityType="Self.SposobPlatnosci" />
+          <EntitySet Name="StanyMagazynowe" EntityType="Self.StanyMagazynowe" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="StratyMagazynoweIZwroty" EntityType="Self.StratyMagazynoweIZwroty" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Towar" EntityType="Self.Towar" />
+          <EntitySet Name="UzytkowicyERP" EntityType="Self.UzytkowicyERP" />
+          <EntitySet Name="ZamowieniaOdKlientow" EntityType="Self.ZamowieniaOdKlientow" />
+          <EntitySet Name="ZamowieniaWMS" EntityType="Self.ZamowieniaWMS" />
+          <AssociationSet Name="FK_Kontrahent_Adres" Association="Self.FK_Kontrahent_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Kontrahent" EntitySet="Kontrahent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Faktura_Kontrahent" Association="Self.FK_Faktura_Kontrahent">
+            <End Role="Kontrahent" EntitySet="Kontrahent" />
+            <End Role="Faktura" EntitySet="Faktura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Faktura_SposobPlatnosci" Association="Self.FK_Faktura_SposobPlatnosci">
+            <End Role="SposobPlatnosci" EntitySet="SposobPlatnosci" />
+            <End Role="Faktura" EntitySet="Faktura" />
+          </AssociationSet>
+          <AssociationSet Name="FK_KorektaFakturySprzedazy_Faktura" Association="Self.FK_KorektaFakturySprzedazy_Faktura">
+            <End Role="Faktura" EntitySet="Faktura" />
+            <End Role="KorektaFakturySprzedazy" EntitySet="KorektaFakturySprzedazy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PozycjaFaktury_Faktura" Association="Self.FK_PozycjaFaktury_Faktura">
+            <End Role="Faktura" EntitySet="Faktura" />
+            <End Role="PozycjaFaktury" EntitySet="PozycjaFaktury" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UzytkowicyERP_Kadry" Association="Self.FK_UzytkowicyERP_Kadry">
+            <End Role="Kadry" EntitySet="Kadry" />
+            <End Role="UzytkowicyERP" EntitySet="UzytkowicyERP" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kontrahent_Status" Association="Self.FK_Kontrahent_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Kontrahent" EntitySet="Kontrahent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kontrahent_Status1" Association="Self.FK_Kontrahent_Status1">
+            <End Role="Rodzaj" EntitySet="Rodzaj" />
+            <End Role="Kontrahent" EntitySet="Kontrahent" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZamowieniaOdKlientow_Kontrahent" Association="Self.FK_ZamowieniaOdKlientow_Kontrahent">
+            <End Role="Kontrahent" EntitySet="Kontrahent" />
+            <End Role="ZamowieniaOdKlientow" EntitySet="ZamowieniaOdKlientow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PozycjaFaktury_Towar" Association="Self.FK_PozycjaFaktury_Towar">
+            <End Role="Towar" EntitySet="Towar" />
+            <End Role="PozycjaFaktury" EntitySet="PozycjaFaktury" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StanyMagazynowe_Towar" Association="Self.FK_StanyMagazynowe_Towar">
+            <End Role="Towar" EntitySet="Towar" />
+            <End Role="StanyMagazynowe" EntitySet="StanyMagazynowe" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Towar_StanyMagazynowe" Association="Self.FK_Towar_StanyMagazynowe">
+            <End Role="StanyMagazynowe" EntitySet="StanyMagazynowe" />
+            <End Role="Towar" EntitySet="Towar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Towar_Status" Association="Self.FK_Towar_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="Towar" EntitySet="Towar" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StratyMagazynoweIZwroty_Towar" Association="Self.FK_StratyMagazynoweIZwroty_Towar">
+            <End Role="Towar" EntitySet="Towar" />
+            <End Role="StratyMagazynoweIZwroty" EntitySet="StratyMagazynoweIZwroty" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZamowieniaOdKlientow_Towar" Association="Self.FK_ZamowieniaOdKlientow_Towar">
+            <End Role="Towar" EntitySet="Towar" />
+            <End Role="ZamowieniaOdKlientow" EntitySet="ZamowieniaOdKlientow" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZamowieniaWMS_ZamowieniaOdKlientow" Association="Self.FK_ZamowieniaWMS_ZamowieniaOdKlientow">
+            <End Role="ZamowieniaOdKlientow" EntitySet="ZamowieniaOdKlientow" />
+            <End Role="ZamowieniaWMS" EntitySet="ZamowieniaWMS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZamowieniaWMS_ZamowieniaOdKlientow1" Association="Self.FK_ZamowieniaWMS_ZamowieniaOdKlientow1">
+            <End Role="ZamowieniaOdKlientow" EntitySet="ZamowieniaOdKlientow" />
+            <End Role="ZamowieniaWMS" EntitySet="ZamowieniaWMS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="entieties2StoreContainer" CdmEntityContainer="Entities2">
+          <EntitySetMapping Name="Adres">
+            <EntityTypeMapping TypeName="entieties2.Adres">
+              <MappingFragment StoreEntitySet="Adres">
+                <ScalarProperty Name="IdAdresu" ColumnName="IdAdresu" />
+                <ScalarProperty Name="Ulica" ColumnName="Ulica" />
+                <ScalarProperty Name="Miejscowosc" ColumnName="Miejscowosc" />
+                <ScalarProperty Name="NrDomu" ColumnName="NrDomu" />
+                <ScalarProperty Name="NrLokalu" ColumnName="NrLokalu" />
+                <ScalarProperty Name="KodPocztowy" ColumnName="KodPocztowy" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BibliotekaDokumentow">
+            <EntityTypeMapping TypeName="entieties2.BibliotekaDokumentow">
+              <MappingFragment StoreEntitySet="BibliotekaDokumentow">
+                <ScalarProperty Name="Numer" ColumnName="Numer" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+                <ScalarProperty Name="IdDokumentuBiblioteki" ColumnName="IdDokumentuBiblioteki" />
+                <ScalarProperty Name="Odbiorca" ColumnName="Odbiorca" />
+                <ScalarProperty Name="NrDok" ColumnName="NrDok" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Faktura">
+            <EntityTypeMapping TypeName="entieties2.Faktura">
+              <MappingFragment StoreEntitySet="Faktura">
+                <ScalarProperty Name="IdFaktury" ColumnName="IdFaktury" />
+                <ScalarProperty Name="Numer" ColumnName="Numer" />
+                <ScalarProperty Name="DataWystawienia" ColumnName="DataWystawienia" />
+                <ScalarProperty Name="IdKontrahenta" ColumnName="IdKontrahenta" />
+                <ScalarProperty Name="TerminPłatnosci" ColumnName="TerminPłatnosci" />
+                <ScalarProperty Name="IdSposobuPlatnosci" ColumnName="IdSposobuPlatnosci" />
+                <ScalarProperty Name="CzyZatwierdzono" ColumnName="CzyZatwierdzono" />
+                <ScalarProperty Name="CzyAktywna" ColumnName="CzyAktywna" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InformatorTowaru">
+            <EntityTypeMapping TypeName="entieties2.InformatorTowaru">
+              <MappingFragment StoreEntitySet="InformatorTowaru">
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+                <ScalarProperty Name="IdInformatoraTowaru" ColumnName="IdInformatoraTowaru" />
+                <ScalarProperty Name="Data_utworzenie_zlecenia" ColumnName="Data_utworzenie_zlecenia" />
+                <ScalarProperty Name="IdFaktury" ColumnName="IdFaktury" />
+                <ScalarProperty Name="IdKontrahenta" ColumnName="IdKontrahenta" />
+                <ScalarProperty Name="IdZamowieniaOdKlientow" ColumnName="IdZamowieniaOdKlientow" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="JednostkiMiary">
+            <EntityTypeMapping TypeName="entieties2.JednostkiMiary">
+              <MappingFragment StoreEntitySet="JednostkiMiary">
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+                <ScalarProperty Name="Opakowanie" ColumnName="Opakowanie" />
+                <ScalarProperty Name="IDJednostkiMiary" ColumnName="IDJednostkiMiary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kadry">
+            <EntityTypeMapping TypeName="entieties2.Kadry">
+              <MappingFragment StoreEntitySet="Kadry">
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+                <ScalarProperty Name="IdPracownika" ColumnName="IdPracownika" />
+                <ScalarProperty Name="ImiePracownika" ColumnName="ImiePracownika" />
+                <ScalarProperty Name="NazwiskoPracownika" ColumnName="NazwiskoPracownika" />
+                <ScalarProperty Name="DataZatrudnieniaPracownika" ColumnName="DataZatrudnieniaPracownika" />
+                <ScalarProperty Name="MiastoZamieszkaniaPracownika" ColumnName="MiastoZamieszkaniaPracownika" />
+                <ScalarProperty Name="KodPocztowyPracownika" ColumnName="KodPocztowyPracownika" />
+                <ScalarProperty Name="UlicaPracownika" ColumnName="UlicaPracownika" />
+                <ScalarProperty Name="NrDomu_mieszkaniaPracownika" ColumnName="NrDomu_mieszkaniaPracownika" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kontrahent">
+            <EntityTypeMapping TypeName="entieties2.Kontrahent">
+              <MappingFragment StoreEntitySet="Kontrahent">
+                <ScalarProperty Name="IdKontrahenta" ColumnName="IdKontrahenta" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+                <ScalarProperty Name="NIP" ColumnName="NIP" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="IdRodzaju" ColumnName="IdRodzaju" />
+                <ScalarProperty Name="IdStatusu" ColumnName="IdStatusu" />
+                <ScalarProperty Name="IdAdresu" ColumnName="IdAdresu" />
+                <ScalarProperty Name="DataPrzystapienia" ColumnName="DataPrzystapienia" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KorektaFakturySprzedazy">
+            <EntityTypeMapping TypeName="entieties2.KorektaFakturySprzedazy">
+              <MappingFragment StoreEntitySet="KorektaFakturySprzedazy">
+                <ScalarProperty Name="Numer" ColumnName="Numer" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+                <ScalarProperty Name="IdKorektyFaktury" ColumnName="IdKorektyFaktury" />
+                <ScalarProperty Name="IdFaktury" ColumnName="IdFaktury" />
+                <ScalarProperty Name="DataWystawieniaKorekty" ColumnName="DataWystawieniaKorekty" />
+                <ScalarProperty Name="CzyZatwierdzono" ColumnName="CzyZatwierdzono" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PozycjaFaktury">
+            <EntityTypeMapping TypeName="entieties2.PozycjaFaktury">
+              <MappingFragment StoreEntitySet="PozycjaFaktury">
+                <ScalarProperty Name="IdPozycjiFaktury" ColumnName="IdPozycjiFaktury" />
+                <ScalarProperty Name="IdFaktury" ColumnName="IdFaktury" />
+                <ScalarProperty Name="IdTowaru" ColumnName="IdTowaru" />
+                <ScalarProperty Name="CenaNetto" ColumnName="CenaNetto" />
+                <ScalarProperty Name="Ilosc" ColumnName="Ilosc" />
+                <ScalarProperty Name="Rabat" ColumnName="Rabat" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Przetargi">
+            <EntityTypeMapping TypeName="entieties2.Przetargi">
+              <MappingFragment StoreEntitySet="Przetargi">
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+                <ScalarProperty Name="IDPrzetargu" ColumnName="IDPrzetargu" />
+                <ScalarProperty Name="NrPrzetargu" ColumnName="NrPrzetargu" />
+                <ScalarProperty Name="NazwaPrzetargu" ColumnName="NazwaPrzetargu" />
+                <ScalarProperty Name="DataOgloszenia" ColumnName="DataOgloszenia" />
+                <ScalarProperty Name="DataZakonczenia" ColumnName="DataZakonczenia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rodzaj">
+            <EntityTypeMapping TypeName="entieties2.Rodzaj">
+              <MappingFragment StoreEntitySet="Rodzaj">
+                <ScalarProperty Name="IdRodzaju" ColumnName="IdRodzaju" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SposobPlatnosci">
+            <EntityTypeMapping TypeName="entieties2.SposobPlatnosci">
+              <MappingFragment StoreEntitySet="SposobPlatnosci">
+                <ScalarProperty Name="IdSposobuPlatnosci" ColumnName="IdSposobuPlatnosci" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StanyMagazynowe">
+            <EntityTypeMapping TypeName="entieties2.StanyMagazynowe">
+              <MappingFragment StoreEntitySet="StanyMagazynowe">
+                <ScalarProperty Name="IdStanuMagazynowego" ColumnName="IdStanuMagazynowego" />
+                <ScalarProperty Name="IdTowaru" ColumnName="IdTowaru" />
+                <ScalarProperty Name="DataPrzyjecia" ColumnName="DataPrzyjecia" />
+                <ScalarProperty Name="DataPrzydatnosciDoUzycia" ColumnName="DataPrzydatnosciDoUzycia" />
+                <ScalarProperty Name="IloscPrzyjeta" ColumnName="IloscPrzyjeta" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="entieties2.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="IdStatusu" ColumnName="IdStatusu" />
+                <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StratyMagazynoweIZwroty">
+            <EntityTypeMapping TypeName="entieties2.StratyMagazynoweIZwroty">
+              <MappingFragment StoreEntitySet="StratyMagazynoweIZwroty">
+                <ScalarProperty Name="Numer" ColumnName="Numer" />
+                <ScalarProperty Name="IdStratMagazynowychIZwrotow" ColumnName="IdStratMagazynowychIZwrotow" />
+                <ScalarProperty Name="IdTowaru" ColumnName="IdTowaru" />
+                <ScalarProperty Name="DataZgloszenia" ColumnName="DataZgloszenia" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="entieties2.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Towar">
+            <EntityTypeMapping TypeName="entieties2.Towar">
+              <MappingFragment StoreEntitySet="Towar">
+                <ScalarProperty Name="IdTowaru" ColumnName="IdTowaru" />
+                <ScalarProperty Name="Kod" ColumnName="Kod" />
+                <ScalarProperty Name="NazwaTowaru" ColumnName="NazwaTowaru" />
+                <ScalarProperty Name="StawkaVatSprzedazy" ColumnName="StawkaVatSprzedazy" />
+                <ScalarProperty Name="CenaNetto" ColumnName="CenaNetto" />
+                <ScalarProperty Name="Marza" ColumnName="Marza" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+                <ScalarProperty Name="IdStanuMagazynowego" ColumnName="IdStanuMagazynowego" />
+                <ScalarProperty Name="IdStatusu" ColumnName="IdStatusu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UzytkowicyERP">
+            <EntityTypeMapping TypeName="entieties2.UzytkowicyERP">
+              <MappingFragment StoreEntitySet="UzytkowicyERP">
+                <ScalarProperty Name="IDUzytkownikaERP" ColumnName="IDUzytkownikaERP" />
+                <ScalarProperty Name="Stanowisko" ColumnName="Stanowisko" />
+                <ScalarProperty Name="Dzial" ColumnName="Dzial" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+                <ScalarProperty Name="IDPracownika" ColumnName="IDPracownika" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZamowieniaOdKlientow">
+            <EntityTypeMapping TypeName="entieties2.ZamowieniaOdKlientow">
+              <MappingFragment StoreEntitySet="ZamowieniaOdKlientow">
+                <ScalarProperty Name="Numer" ColumnName="Numer" />
+                <ScalarProperty Name="IdZamowieniaOdKlientow" ColumnName="IdZamowieniaOdKlientow" />
+                <ScalarProperty Name="IdTowaru" ColumnName="IdTowaru" />
+                <ScalarProperty Name="IloscZamowiona" ColumnName="IloscZamowiona" />
+                <ScalarProperty Name="Opis" ColumnName="Opis" />
+                <ScalarProperty Name="Data_utworzenia_zlecenia" ColumnName="Data_utworzenia_zlecenia" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+                <ScalarProperty Name="IdKontrahenta" ColumnName="IdKontrahenta" />
+                <ScalarProperty Name="IdStanuMagazynowego" ColumnName="IdStanuMagazynowego" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZamowieniaWMS">
+            <EntityTypeMapping TypeName="entieties2.ZamowieniaWMS">
+              <MappingFragment StoreEntitySet="ZamowieniaWMS">
+                <ScalarProperty Name="Numer" ColumnName="Numer" />
+                <ScalarProperty Name="IdZamowieniaWMS" ColumnName="IdZamowieniaWMS" />
+                <ScalarProperty Name="Data_utworzenia_zlecenia" ColumnName="Data_utworzenia_zlecenia" />
+                <ScalarProperty Name="IdZamowieniaOdKlienta" ColumnName="IdZamowieniaOdKlienta" />
+                <ScalarProperty Name="IloscWydana" ColumnName="IloscWydana" />
+                <ScalarProperty Name="IdTowaru" ColumnName="IdTowaru" />
+                <ScalarProperty Name="CzyAktywny" ColumnName="CzyAktywny" />
+                <ScalarProperty Name="IdKontrahenta" ColumnName="IdKontrahenta" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

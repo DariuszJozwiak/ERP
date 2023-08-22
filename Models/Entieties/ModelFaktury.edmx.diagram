@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f2f45b9e51b947aeb792ca119bd10698" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="entieties2.Adres" Width="1.5" PointX="0.75" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.BibliotekaDokumentow" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.Faktura" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.InformatorTowaru" Width="1.5" PointX="2.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.JednostkiMiary" Width="1.5" PointX="12.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.Kadry" Width="1.5" PointX="12.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.Kontrahent" Width="1.5" PointX="3" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.KorektaFakturySprzedazy" Width="1.5" PointX="7.5" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.PozycjaFaktury" Width="1.5" PointX="10.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.Przetargi" Width="1.5" PointX="4.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.Rodzaj" Width="1.5" PointX="0.75" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.SposobPlatnosci" Width="1.5" PointX="3" PointY="3.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.StanyMagazynowe" Width="1.5" PointX="8.25" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.Status" Width="1.5" PointX="0.75" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.StratyMagazynoweIZwroty" Width="1.5" PointX="8.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.sysdiagrams" Width="1.5" PointX="10.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.Towar" Width="1.5" PointX="6" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.UzytkowicyERP" Width="1.5" PointX="15" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.ZamowieniaOdKlientow" Width="1.5" PointX="11.25" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="entieties2.ZamowieniaWMS" Width="1.5" PointX="13.5" PointY="8.125" IsExpanded="true" />
+        <AssociationConnector Association="entieties2.FK_Kontrahent_Adres" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_Faktura_Kontrahent" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_Faktura_SposobPlatnosci" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_KorektaFakturySprzedazy_Faktura" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_PozycjaFaktury_Faktura" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_UzytkowicyERP_Kadry" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_Kontrahent_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_Kontrahent_Status1" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_ZamowieniaOdKlientow_Kontrahent" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_PozycjaFaktury_Towar" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_StanyMagazynowe_Towar" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_Towar_StanyMagazynowe" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_Towar_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_StratyMagazynoweIZwroty_Towar" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_ZamowieniaOdKlientow_Towar" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_ZamowieniaWMS_ZamowieniaOdKlientow" ManuallyRouted="false" />
+        <AssociationConnector Association="entieties2.FK_ZamowieniaWMS_ZamowieniaOdKlientow1" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
